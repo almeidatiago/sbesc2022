@@ -1,77 +1,212 @@
-### 1. ErrorMetricsCompAdder.ipynb
+# Project Dictionaries
 
-* **Exact vs. Approximate Analysis**: Uses Python to compare "Exact" addition with several approximate versions.
-* **Probability Mass Function (PMF)**: Generates a histogram-like chart showing the statistical distribution of errors, which is crucial for predicting how an approximate circuit will behave under different workloads.
-* **Metric Comparison**: Calculates basic metrics (MAE, MSE, WCE) to rank different adder designs from the EvoApprox library.
+---
 
-### 2. ErrorMetricsCompLOA.ipynb
+## 📄 File: image-metrics.ipynb
 
-* **Lower-Part-OR Adder (LOA) Study**: Specifically focuses on the LOA architecture, where the LSBs (Least Significant Bits) are computed using a simple OR gate instead of full addition logic.
-* **Configurable Approximation**: Analyzes how the error metrics scale as you increase the number of approximate bits (from LOA1 to LOA8), showing the exponential growth of error vs. the linear reduction in hardware area.
+### Image Metrics
+Numerical measures used to evaluate image quality or differences between images.
 
-### 3. ErrorMetricsCompMult.ipynb
+### Error Metric
+A value that quantifies how far a result is from a reference or expected value.
 
-* **Multiplier Precision**: Similar to the adder analysis but for multiplication. Since multiplication is a repeated addition, errors here tend to be much larger and more complex to model.
-* **Library Verification**: Compares the locally calculated error values against the theoretical values provided by the EvoApprox library metadata.
+### Mean Error
+The average difference between predicted and reference values.
 
-### 4. matrix_mult.ipynb
+### Image Comparison
+The process of evaluating similarities or differences between two images.
 
-* **System-Level Benchmark**: Moves from single operations to a full algorithm (Matrix Multiplication) running on an FPGA (likely using PYNQ).
-* **Power Profiling**: Includes code to plot real-time Power (W) consumption, showing how much energy is saved when switching from an exact multiplier to an approximate one.
+### Quantization
+The process of reducing numerical precision to simplify computation.
 
-### 5. OverallMetrics.ipynb
+### Approximate Computing
+A technique that trades accuracy for better performance or lower energy use.
 
-* **Comparative Visualization**: Uses Seaborn boxplots to compare various error metrics (MSE, MAE, MRED) across all tested designs.
-* **Pareto Optimization**: Implements the `pareto_frontier` function to identify designs that provide the "best" balance—meaning you can't get more accuracy without using more power.
+### Evaluation Pipeline
+A sequence of steps used to compute and analyze metrics.
 
-### 6. Sobel_pl.ipynb
+### Experimental Results
+Data obtained from running experiments or simulations.
 
-* **Image Processing Pipeline**: Applies the approximate hardware to a Sobel edge detection filter.
-* **Visual Validation**: Displays the resulting "edge image" to see if the human eye can actually detect the errors introduced by the approximate arithmetic.
+---
 
-### 7. matmul.cpp
+## 📄 File: mo632_project_stats.ipynb
 
-* **HLS Optimization**: High-Level Synthesis code for matrix multiplication.
-* **Array Partitioning**: Uses `#pragma HLS ARRAY_PARTITION` to break data into multiple memory banks, allowing the FPGA to read all inputs simultaneously for higher throughput.
-* **Hardware Buffering**: Implements local buffers (A, B, and C) to minimize expensive access to the main system memory (DRAM).
+### Statistical Analysis
+The use of statistics to interpret and summarize data.
 
-### 8. sobel.cpp
+### Descriptive Statistics
+Basic measures such as mean, variance, and standard deviation.
 
-* **Sobel Architecture**: C++ source code defining the 3x3 sliding window used for edge detection.
-* **Hardware Parallelism**: Uses `#pragma HLS UNROLL` to process multiple pixels or multiplication steps at once, significantly speeding up image processing compared to a CPU.
+### Hypothesis Testing
+A method to decide if observed results are statistically significant.
 
-### 9. Error_Raw_Adders_LOA.csv
+### Normality
+The assumption that data follows a normal (Gaussian) distribution.
 
-* **LOA Dataset**: A raw table recording the exact MSE, MAE, and EP (Error Probability) for every LOA bit-width configuration. This is the source data for the charts in your paper.
+### Variance
+A measure of how spread out data values are.
 
-### 10. Error_Raw_Adders.csv
+### Statistical Significance
+Indicates whether results are likely due to chance or not.
 
-* **Generic Adder Dataset**: Data for various 16-bit approximate adders (add16se series). It includes columns for both your calculated results and the original library specifications.
+### Confidence Level
+The probability that a statistical conclusion is correct.
 
-### 11. Error_Raw_Mult.csv
+### Data Distribution
+How values are spread across a dataset.
 
-* **Multiplier Dataset**: Records the massive Error Distance and Worst-Case Error values for multipliers, providing the data needed to show why multipliers are more sensitive to approximation than adders.
+---
 
-### 12. results-dse - MSE.csv
+## 📄 File: mo632-project-metrics - overall.csv
 
-* **Design Space Exploration (DSE) - Error**: Records how Mean Square Error changes across 88 different hardware "inputs" or configurations.
+### Overall Metrics
+Aggregated measurements summarizing all experiments or configurations.
 
-### 13. results-dse - overall.csv
+### Accuracy
+How close results are to a reference or correct value.
 
-* **Hardware Resources**: A master table linking accuracy (MSE/MAE) with physical chip usage (LUTs and Flip-Flops). This is the key to proving that your "model-free" or "DFG" approach actually saves space.
+### Error Rate
+The proportion of incorrect or inaccurate results.
 
-### 14. results-dse - plot.csv
+### Performance Metric
+A value that measures efficiency, speed, or quality.
 
-* **Visualization Source**: A curated table used specifically for generating the "Accuracy vs. Power" scatter plots often found in MICRO journal papers.
+### Comparison Baseline
+A reference system used for comparison.
 
-### 15. results-dse - PSNR.csv
+### Experimental Configuration
+A specific setup or parameter choice used in experiments.
 
-* **Visual Quality Data**: Records Peak Signal-to-Noise Ratio (PSNR) values. It shows how "noisy" the Sobel filter output becomes when using different approximate hardware.
+---
 
-### 16. results-dse - SSIM.csv
+## 📄 File: mo632-project-metrics - vivado.csv
 
-* **Structural Fidelity**: Records the Structural Similarity Index (SSIM). It measures how well the outlines and shapes in your image are preserved despite the mathematical errors.
+### Vivado
+A hardware design tool used for FPGA synthesis and analysis.
 
-### 17. requirements.txt
+### Hardware Synthesis
+The process of converting a design into hardware logic.
 
-* **Environment Reproducibility**: Lists every Python library version (e.g., `scikit-image==0.21.0`, `scipy==1.10.1`) used in your research to ensure other scientists can reproduce your results.
+### Resource Utilization
+The amount of hardware resources used.
+
+### Latency
+The time required to produce an output.
+
+### Throughput
+The rate at which outputs are produced.
+
+### FPGA Metrics
+Measurements related to hardware performance and usage.
+
+---
+
+## 📄 File: mo632-project-metrics - smarthls.csv
+
+### High-Level Synthesis (HLS)
+Automatic generation of hardware from high-level code.
+
+### SmartHLS
+A tool for converting C/C++ code into hardware designs.
+
+### Design Optimization
+Improving performance or reducing resource usage.
+
+### Hardware Mapping
+Translating software concepts into hardware structures.
+
+### Synthesis Report
+A summary of hardware performance and resource usage.
+
+---
+
+## 📄 File: mo632-project-metrics - Errors Img.csv
+
+### Image Error
+A measure of difference between processed and reference images.
+
+### Pixel Error
+Error computed at the individual pixel level.
+
+### Average Error
+Mean value of errors across an image.
+
+### Image Degradation
+Loss of image quality due to approximations or processing.
+
+### Visual Quality
+How good an image looks to a human observer.
+
+---
+
+## 📄 File: mo632-project-metrics - Errors Evo.csv
+
+### Evolutionary Error
+Error measured across evolutionary or iterative processes.
+
+### Evolutionary Algorithm
+An optimization method inspired by natural evolution.
+
+### Fitness Evaluation
+Measuring how good a solution is.
+
+### Generation
+One iteration of an evolutionary process.
+
+### Optimization Process
+A method to find better solutions over time.
+
+---
+
+## 📄 File: mo632-project-metrics - anova.csv
+
+### ANOVA (Analysis of Variance)
+A statistical test to compare means of multiple groups.
+
+### Factor
+A variable being tested in an experiment.
+
+### Group Comparison
+Evaluating differences between sets of data.
+
+### Statistical Test
+A method to assess significance of results.
+
+### P-value
+Probability that observed differences occurred by chance.
+
+---
+
+## 📄 File: mo632-project-metrics - bartlett.csv
+
+### Bartlett’s Test
+A statistical test for equality of variances.
+
+### Homogeneity of Variance
+Assumption that different groups have similar variance.
+
+### Variance Test
+A test that checks how data variability compares across groups.
+
+### Statistical Assumption
+A condition required for certain tests to be valid.
+
+---
+
+## 📄 File: mo632-project-metrics - tukey.csv
+
+### Tukey Test
+A post-hoc test used after ANOVA to compare groups.
+
+### Pairwise Comparison
+Comparing data groups two at a time.
+
+### Post-hoc Analysis
+Additional analysis after a main statistical test.
+
+### Mean Difference
+Difference between average values of two groups.
+
+### Significant Difference
+A difference unlikely to be caused by chance.
